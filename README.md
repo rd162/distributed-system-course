@@ -59,3 +59,10 @@ Verify the service
 ```sh
 curl http://{EXTERNAL-IP}:60000/api/hello
 ```
+
+In order to delete all resources at once you can delete the whole GCP project and then "undelete" it after some time. 
+The resources will not be restored after undelete, however you will need to enable services again. 
+
+```sh
+gcloud projects delete distributed-system-course
+```
