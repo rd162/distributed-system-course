@@ -1,4 +1,4 @@
-package org.jpdna.grpchello;
+package com.rd162.web;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
