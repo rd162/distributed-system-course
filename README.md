@@ -66,3 +66,13 @@ The resources will not be restored after undelete, however you will need to enab
 ```sh
 gcloud projects delete distributed-system-course
 ```
+
+How to forcibly refresh deployment (if you pushed docker image, but had not changed version)?
+
+```sh
+kubectl get all
+kubectl delete deployment.apps/web-service
+kubectl delete deployment.apps/rpc-service
+kubectl apply -f rpc-service/deployment.yaml
+kubectl apply -f web-service/deployment.yaml
+```
