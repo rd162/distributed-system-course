@@ -76,3 +76,28 @@ kubectl delete deployment.apps/rpc-service
 kubectl apply -f rpc-service/deployment.yaml
 kubectl apply -f web-service/deployment.yaml
 ```
+
+## Deployment for Azure AKS
+https://docs.microsoft.com/en-us/azure/aks/cluster-container-registry-integration
+
+```sh
+az group create --name distributed-system-course --location westus
+az acr create -n myacr162 -g distributed-system-course --sku basic --location westus
+az acr login -n myacr162
+docker build -t myacr162.azurecr.io/distributed-system-course/web-service:latest ./web-service/
+docker push myacr162.azurecr.io/distributed-system-course/web-service:latest
+docker build -t myacr162.azurecr.io/distributed-system-course/rpc-service:latest ./rpc-service/
+docker push myacr162.azurecr.io/distributed-system-course/rpc-service:latest
+az aks create --resource-group distributed-system-course --n AKSCluster --node-count 3 --generate-ssh-keys --attach-acr $ACR
+az aks get-credentials -g distributed-system-course -n AKSCluster
+
+kubectl apply -f ./web-service/deployment-azure.yaml
+kubectl apply -f ./web-service/service.yaml
+kubectl get service web-service
+
+kubectl apply -f ./rpc-service/deployment-azure.yaml
+kubectl apply -f ./rpc-service/service.yaml
+kubectl get service rpc-service
+
+az group delete --name distributed-system-course
+```

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rpc-service
+spec:
+  selector:
+    matchLabels:
+      app: rpc-service
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rpc-service
+        version: v1
+    spec:
+      containers:
+      - name: rpc-service
+        image: "myacr162.azurecr.io/distributed-system-course/rpc-service:latest"
+        ports:
+        - containerPort: 50051
