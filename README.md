@@ -94,3 +94,15 @@ See build instruction in the appropriate README file of each service.
 #### Deploy the Services into GKE
 
 See deployment instruction in the appropriate README file of each service.
+
+## Useful Tricks
+
+### How to Switch Current K8s Cluster
+
+If you are working with several clusters (like local Minikube or docker-desktop, or different cloud providers like GCP or Azure) you need to switch kubectl to point another cluster.
+
+```sh
+kubectl config current-context
+kubectl config get-contexts
+kubectl config use-context <Context NAME>
+```
