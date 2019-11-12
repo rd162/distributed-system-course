@@ -1,6 +1,6 @@
 # The web-service
 
-Simple Spring Boot web service with one endpoint.
+Simple Spring Boot web service.
 
 ## Build and Deploy
 
@@ -16,7 +16,7 @@ docker push $CR_NAME/distributed-system-course/web-service:latest
 ### Deploy the web-service into K8s Cluster
 
 ```sh
-kubectl apply -f ./deployment.yaml
+kubectl apply -f ./deployment.yaml # Note you need to update deployment.yaml file with proper CR ($ACR_NAME.azurecr.io) if you use Azure CR
 kubectl apply -f ./service.yaml
 kubectl get service web-service
 ```

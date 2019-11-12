@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: listener-service
+spec:
+  selector:
+    matchLabels:
+      app: listener-service
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: listener-service
+        version: v1
+    spec:
+      containers:
+      - name: listener-service
+        image: "gcr.io/distributed-system-course/listener-service:latest"

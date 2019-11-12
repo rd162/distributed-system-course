@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: rpc-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: rpc-service
     version: v1
