@@ -147,10 +147,17 @@ There are two parts to Helm: The Helm client (helm) and the Helm server (Tiller)
 Tiller, the server portion of Helm, typically runs inside of your Kubernetes cluster. But for development, it can also be run locally, and configured to talk to a remote Kubernetes cluster.
 
 **Note:** On Windows you may ned to add environment variable `HELM_HOME=C:\Users\{your user id}\.helm`
+**Note:** the service account is required: <https://helm.sh/docs/using_helm/#role-based-access-control>
 
 ```sh
 kubectl config current-context # make sure the desired cluster is the current
+
+# Create service account and cluster role binding for tiller
+kubectl --namespace kube-system create serviceaccount tiller
+kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+
 # Install Tiller into the current cluster
-helm init
+helm init --service-account tiller --history-max 200
+
 # Check the Tiller is installed
 kubectl get pods --namespace kube-system | grep tiller
