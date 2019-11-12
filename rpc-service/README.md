@@ -8,8 +8,9 @@ Simple Spring Boot web service with one endpoint.
 
 ```sh
 ./mvnw clean package
-docker build -t gcr.io/distributed-system-course/rpc-service:latest .
-docker push gcr.io/distributed-system-course/rpc-service:latest
+CR_NAME=gcr.io # Change this to $ACR_NAME.azurecr.io if you use Azure as Container Registry provider, where ACR_NAME your unique Azure Container registry instance (see master README)
+docker build -t $CR_NAME/distributed-system-course/rpc-service:latest .
+docker push $CR_NAME/distributed-system-course/rpc-service:latest
 ```
 
 ### Deploy the rpc-service into K8s Cluster
@@ -21,6 +22,12 @@ kubectl get service rpc-service
 ```
 
 ## Useful Tricks
+
+### Check the rpc-service is Running
+
+```sh
+curl http://{EXTERNAL-IP}:60000/api/hello
+```
 
 ### How to Forcibly Refresh Deployment in K8s
 
