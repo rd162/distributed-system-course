@@ -7,7 +7,7 @@
 	<name>listener-service</name>
 	<description>Example service for Distributed Systems course</description>
 	<properties>
-		<mainClass>com.rd162.rpc.HelloWorldServer</mainClass>
+		<mainClass>com.rd162.listener.ListenerServer</mainClass>
 	</properties>
 	<dependencies>
 		<dependency>
