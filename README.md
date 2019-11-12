@@ -26,31 +26,15 @@ gcloud auth configure-docker
 
 Note: after the project is created you also may need to enable billing for this project in the console <https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_an_existing_project>. However, you may freely skip this instruction, because each further command that crete services with billing will prompt for that.
 
-##### Build Container Images
+##### Build Services Container Images
 
-###### Build web-service Image
-
-```sh
-cd web-service
-./mvnw clean package
-docker build -t gcr.io/distributed-system-course/web-service:latest .
-docker push gcr.io/distributed-system-course/web-service:latest
-```
-
-###### Build rpc-service Image
-
-```sh
-cd rpc-service
-./mvnw clean package
-docker build -t gcr.io/distributed-system-course/rpc-service:latest .
-docker push gcr.io/distributed-system-course/rpc-service:latest
-```
+See appropriate README file for each service for how to build.
 
 ##### Create Cluster in GKE
 
 ```sh
-gcloud container clusters create distributed-system-course --num-nodes=3
-gcloud container clusters get-credentials distributed-system-course
+gcloud container clusters create distributed-system-course --num-nodes=3 # NOTE: number of nodes might be different for each course task
+gcloud container clusters get-credentials distributed-system-course # This will also update your kube config.
 ```
 
 ##### Deploy the Services into GKE
