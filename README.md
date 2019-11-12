@@ -1,21 +1,23 @@
-# distributed-system-course
+# Communication in Distributed Systems Course
 
-Boilerplate for course tasks (Communication in Distributed Systems)
+Boilerplate for course home work.
 
-## Deployment Instruction
+## Cluster Deployment Instruction for Clouds (GCP and Azure)
 
-### Google Cloud Project (GCP)
+### Google Cloud Platform (GCP)
 
 #### GCP Prerequisites
 
 * Create account in GCP (you also need to install GCP cli <https://cloud.google.com/sdk/install> and login there: `gcloud init`)
 * Enable the following services (you will be prompted through deployment steps as well):
     1. Google Kubernetes Engine (GKE)
-    1. Google Container Registry (GCR)
+    2. Google Container Registry (GCR)
 
-#### Deployment Steps
+#### Create K8s Cluster with GKE and Initialize Local Development Environment
 
 ##### Create GCP Project
+
+The project in GCP is the group of linked resources. All further gclod commands will work against this project. You may delete all the resources by deleting the whole project.  
 
 ```sh
 gcloud projects create distributed-system-course
@@ -26,10 +28,6 @@ gcloud auth configure-docker
 
 Note: after the project is created you also may need to enable billing for this project in the console <https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_an_existing_project>. However, you may freely skip this instruction, because each further command that crete services with billing will prompt for that.
 
-##### Build Services Container Images
-
-See appropriate README file for each service for how to build.
-
 ##### Create Cluster in GKE
 
 ```sh
@@ -37,54 +35,19 @@ gcloud container clusters create distributed-system-course --num-nodes=3 # NOTE:
 gcloud container clusters get-credentials distributed-system-course # This will also update your kube config.
 ```
 
-##### Deploy the Services into GKE
+#### Delete the K8s Cluster in GCP
 
-###### Deploy web-service
-
-```sh
-cd web-service
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
-kubectl get service web-service
-```
-
-###### Deploy rpc-service
-
-```sh
-cd rpc-service
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
-kubectl get service rpc-service
-```
-
-##### Verify the Service
-
-```sh
-curl http://{EXTERNAL-IP}:60000/api/hello
-```
-
-#### Useful tricks
-
-In order to delete all resources at once you can delete the whole GCP project and then "undelete" it after some time.
-The resources will not be restored after undelete, however you will need to enable services again.
+In order to delete all resources at once you can delete the whole GCP project by the following command:
 
 ```sh
 gcloud projects delete distributed-system-course
 ```
 
-How to forcibly refresh deployment (if you pushed docker image, but had not changed version)?
+**NOTE:** Deleting the project in GCP takes unpredictable amount of time while you will not be able to use the same project name for new project. To mitigate this, you can `undelete` the project at short time, then all the resources will be cleaned up there.
 
-```sh
-kubectl get all
-kubectl delete deployment.apps/web-service
-kubectl delete deployment.apps/rpc-service
-kubectl apply -f rpc-service/deployment.yaml
-kubectl apply -f web-service/deployment.yaml
-```
+### Microsoft Azure
 
-### Deployment for Azure AKS
-
-There are also deploymnenbt instruction for Azure AKS (for those who experiences problems with GCP due to billing)
+There are also deployment instruction for Azure AKS (for those who experiences problems with GCP due to billing or other problems)
 
 #### Azure Prerequisites
 
@@ -131,3 +94,13 @@ curl http://{EXTERNAL-IP}:60000/api/hello
 # Delete the resource gorup and all the created resources
 az group delete --name distributed-system-course
 ```
+
+### Deploy the Services into K8s Cluster
+
+#### Build Services Container Images
+
+See build instruction in the appropriate README file of each service.
+
+#### Deploy the Services into GKE
+
+See deployment instruction in the appropriate README file of each service.
