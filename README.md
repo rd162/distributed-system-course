@@ -31,8 +31,9 @@ gcloud auth configure-docker
 ##### Create K8s Cluster in GKE
 
 ```sh
-gcloud container clusters create distributed-system-course --num-nodes=3 # NOTE: number of nodes might be different for each course task
-gcloud container clusters get-credentials distributed-system-course # This will also update your kube config.
+CLUSTER_NAME=gcloud-cluster
+gcloud container clusters create $CLUSTER_NAME --num-nodes=3 # NOTE: number of nodes might be different for each course task
+gcloud container clusters get-credentials $CLUSTER_NAME # This will also update your kube config.
 ```
 
 #### Delete all the Cloud Resources in GCP
@@ -71,7 +72,7 @@ az acr create -g distributed-system-course -n $ACR_NAME --sku Basic --location $
 az acr login -n $ACR_NAME
 
 # Create Azure AKS cluster
-CLUSTER_NAME=MyAKSCluster
+CLUSTER_NAME=AKSCluster
 az aks create -g distributed-system-course -n $CLUSTER_NAME --node-count 3 --generate-ssh-keys --attach-acr $ACR_NAME
 az aks get-credentials -g distributed-system-course -n $CLUSTER_NAME # this will also update and re-purpose your kube config to the Azure AKS cluster
 ```
@@ -106,3 +107,50 @@ kubectl config current-context
 kubectl config get-contexts
 kubectl config use-context <Context NAME>
 ```
+
+## Install Helm
+
+Helm is the cluster package manager for Kubernetes. In short it allows easily install third party services into cluster (like Kafka or RabbitMQ).
+
+### Install Helm Client Using Package Managers (Homebrew or Scoop)
+
+#### Install on macOS with Homebrew
+
+```sh
+brew install kubernetes-helm
+```
+
+#### Install on Windows with Scoop
+
+**Note:** you can also install with [Chocolatey](https://chocolatey.org/).
+
+Install Scoop itself if you didn't.
+Make sure PowerShell 5 (or later, include PowerShell Core) and .NET Framework 4.5 (or later) are installed. Then run in Powershell:
+
+```sh
+iwr -useb get.scoop.sh | iex
+```
+
+When the Scoop is installed ,install helm:
+
+```sh
+scoop install helm
+```
+
+### Install Helm Client Manually
+
+<https://helm.sh/docs/using_helm/#installing-the-helm-client>
+
+### Install Helm Server (Tiller) into the K8s Cluster
+
+There are two parts to Helm: The Helm client (helm) and the Helm server (Tiller).
+Tiller, the server portion of Helm, typically runs inside of your Kubernetes cluster. But for development, it can also be run locally, and configured to talk to a remote Kubernetes cluster.
+
+**Note:** On Windows you may ned to add environment variable `HELM_HOME=C:\Users\{your user id}\.helm`
+
+```sh
+kubectl config current-context # make sure the desired cluster is the current
+# Install Tiller into the current cluster
+helm init
+# Check the Tiller is installed
+kubectl get pods --namespace kube-system | grep tiller
