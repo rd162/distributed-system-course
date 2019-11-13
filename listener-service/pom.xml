@@ -7,9 +7,19 @@
 	<name>listener-service</name>
 	<description>Example service for Distributed Systems course</description>
 	<properties>
-		<mainClass>com.rd162.listener.ListenerServer</mainClass>
+		<mainClass>com.rd162.listener.ListenerService</mainClass>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.26</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.26</version>
+		</dependency>
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>

@@ -23,18 +23,11 @@ kubectl get service rpc-service
 
 ## Useful Tricks
 
-### Check the rpc-service is Running
-
-```sh
-curl http://{EXTERNAL-IP}:60000/api/hello
-```
-
 ### How to Forcibly Refresh Deployment in K8s
 
 In order to update the deployment in K8s you need either: change the deployment object (meaning you need to increase image version each time) or delete/apply again:
 
 ```sh
-kubectl get all
 kubectl delete deployment.apps/rpc-service
 kubectl apply -f ./deployment.yaml
 ```

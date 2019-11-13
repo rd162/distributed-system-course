@@ -108,6 +108,10 @@ kubectl config get-contexts
 kubectl config use-context <Context NAME>
 ```
 
+### kubectl Cheat Sheet
+
+<https://kubernetes.io/docs/reference/kubectl/cheatsheet/>
+
 ## Install Helm
 
 Helm is the cluster package manager for Kubernetes. In short it allows easily install third party services into cluster (like Kafka or RabbitMQ).
@@ -138,6 +142,8 @@ scoop install helm
 ```
 
 ### Install Helm Client Manually
+
+If you experience problems with package managers or do not want to use them, there is instruction how to install manually the helm binary file.
 
 <https://helm.sh/docs/using_helm/#installing-the-helm-client>
 

@@ -21,24 +21,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class HelloController {
 
-    private static final String rpcHost = "rpc-service.default.svc.cluster.local";
-    private static final String rabbitHost = "rabbitmq.default.svc.cluster.local";
-    private static final String EXCHANGE_NAME = "PubSub";
+    private static final String RPC_HOST = "rpc-service.default.svc.cluster.local";
+    private static final String RABBITMQ_HOST = "rabbitmq.default.svc.cluster.local";
+    private static final String RABBITMQ_EXCHANGE_NAME = "PubSub";
 
     private final ConnectionFactory factory = new ConnectionFactory();
 
     public HelloController() {
-        factory.setHost(rabbitHost);
+        factory.setUsername("guest");
+        factory.setPassword("guest");
+        factory.setVirtualHost("/");
+        factory.setHost(RABBITMQ_HOST);
+        factory.setPort(5672);
     }
 
     @GetMapping("/hello")
-    public HelloResponse hello() throws InterruptedException {
-        HelloWorldClient client = new HelloWorldClient(rpcHost, 50051);
-        try {
+    public HelloResponse hello() throws InterruptedException, IOException {
+        try (HelloWorldClient client = new HelloWorldClient(RPC_HOST, 50051)) {
             HelloReply message = client.greet("Dima");
             return new HelloResponse(message.getMessage());
-        } finally {
-            client.shutdown();
         }
     }
 
@@ -47,10 +48,10 @@ public class HelloController {
             throws IOException, TimeoutException, UnsupportedEncodingException {
         try (Connection connection = factory.newConnection(); Channel channel = connection.createChannel()) {
 
-            channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+            channel.exchangeDeclare(RABBITMQ_EXCHANGE_NAME, "fanout");
 
             String message = request.getMessage();
-            channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes("UTF-8"));
+            channel.basicPublish(RABBITMQ_EXCHANGE_NAME, "", null, message.getBytes("UTF-8"));
         }
     }
 }
