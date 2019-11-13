@@ -96,25 +96,9 @@ See build instruction in the appropriate README file of each service.
 
 See deployment instruction in the appropriate README file of each service.
 
-## Useful Tricks
-
-### How to Switch Current K8s Cluster
-
-If you are working with several clusters (like local Minikube or docker-desktop, or different cloud providers like GCP or Azure) you need to switch kubectl to point another cluster.
-
-```sh
-kubectl config current-context
-kubectl config get-contexts
-kubectl config use-context <Context NAME>
-```
-
-### kubectl Cheat Sheet
-
-<https://kubernetes.io/docs/reference/kubectl/cheatsheet/>
-
 ## Install Helm
 
-Helm is the cluster package manager for Kubernetes. In short it allows easily install third party services into cluster (like Kafka or RabbitMQ).
+[Helm](https://helm.sh/) is the cluster package manager for Kubernetes. In short it allows easily install third party services into cluster (like Kafka or RabbitMQ).
 
 ### Install Helm Client Using Package Managers (Homebrew or Scoop)
 
@@ -167,3 +151,26 @@ helm init --service-account tiller --history-max 200
 
 # Check the Tiller is installed
 kubectl get pods --namespace kube-system | grep tiller
+
+## Useful Tricks
+
+### How to Switch Current K8s Cluster
+
+If you are working with several clusters (like local Minikube or docker-desktop, or different cloud providers like GCP or Azure) you need to switch kubectl to point another cluster.
+
+```sh
+kubectl config current-context
+kubectl config get-contexts
+kubectl config use-context <Context NAME>
+```
+
+### How to get logs of the pod
+
+```sh
+kubectl get pods
+kubectl logs <pod-name>
+```
+
+### kubectl Cheat Sheet
+
+<https://kubernetes.io/docs/reference/kubectl/cheatsheet/>
