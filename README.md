@@ -151,6 +151,7 @@ helm init --service-account tiller --history-max 200
 
 # Check the Tiller is installed
 kubectl get pods --namespace kube-system | grep tiller
+```
 
 ## Useful Tricks
 
