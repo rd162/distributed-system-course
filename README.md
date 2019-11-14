@@ -34,7 +34,7 @@ gcloud auth configure-docker
 
 ```sh
 CLUSTER_NAME=gcloud-cluster
-gcloud container clusters create $CLUSTER_NAME --num-nodes=3 "n1-standard-1" --disk-type="pd-standard" --disk-size="8GB"
+gcloud container clusters create $CLUSTER_NAME --num-nodes=3 "n1-standard-1" --disk-type="pd-standard" --disk-size="10GB"
 gcloud container clusters get-credentials $CLUSTER_NAME # This will also update your kube config.
 ```
 
