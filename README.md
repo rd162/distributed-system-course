@@ -26,13 +26,15 @@ gcloud config set compute/zone us-central1-b
 gcloud auth configure-docker
 ```
 
-**NOTE:** after the project is created you also may need to enable billing for this project in the console <https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_an_existing_project>. However, you may freely skip this instruction, because each further command that crete services with billing will prompt for that.
+**NOTE:** after the project is created you also may need to enable billing for this project in the console <https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_an_existing_project>. Most of commands being run first time will prompt for this. If you experience any problem you can enable in console vy this link: <https://console.cloud.google.com/apis/library/container.googleapis.com?q=kubernetes%20engine&_ga=2.268948466.-287001566.1551209143>
 
 ##### Create K8s Cluster in GKE
 
+**Note:** The number of nodes (here is 3) might be different for each course task.
+
 ```sh
 CLUSTER_NAME=gcloud-cluster
-gcloud container clusters create $CLUSTER_NAME --num-nodes=3 # NOTE: number of nodes might be different for each course task
+gcloud container clusters create $CLUSTER_NAME --num-nodes=3 "n1-standard-1" --disk-type="pd-standard" --disk-size="8GB"
 gcloud container clusters get-credentials $CLUSTER_NAME # This will also update your kube config.
 ```
 
