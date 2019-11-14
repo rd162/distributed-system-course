@@ -34,7 +34,7 @@ gcloud auth configure-docker
 
 ```sh
 CLUSTER_NAME=gcloud-cluster
-gcloud container clusters create $CLUSTER_NAME --num-nodes=3 "n1-standard-1" --disk-type="pd-standard" --disk-size="10GB"
+gcloud container clusters create $CLUSTER_NAME --num-nodes=3 --machine-type="n1-standard-1" --disk-type="pd-standard" --disk-size="10GB"
 gcloud container clusters get-credentials $CLUSTER_NAME # This will also update your kube config.
 ```
 
@@ -46,7 +46,7 @@ In order to delete all resources at once you can delete the whole GCP project by
 gcloud projects delete distributed-system-course
 ```
 
-**NOTE:** Deleting the project in GCP takes unpredictable amount of time while you will not be able to use the same project name for new project. To mitigate this, you can `undelete` the project at short time, then all the resources will be cleaned up there.
+**NOTE:** Deleting the project in GCP takes unpredictable amount of time while you will not be able to use the same project name for new project. To mitigate this, you can `undelete` the project.
 
 ### Microsoft Azure
 

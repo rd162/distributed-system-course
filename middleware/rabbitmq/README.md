@@ -1,4 +1,4 @@
-# Install RabbitMQ into K8s Clsuter with Helm
+# Install RabbitMQ into K8s Cluster with Helm
 
 Use the following Helm Chart: <https://github.com/helm/charts/tree/master/stable/rabbitm>
 
