@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: rpc-service
+build:
+  artifacts:
+  - image: gcr.io/distributed-system-course/rpc-service
+deploy:
+  kubectl:
+    manifests:
+    - kube\deployment.yaml
+    - kube\service.yaml

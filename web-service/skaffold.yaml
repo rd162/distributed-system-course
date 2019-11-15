@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: web-service
+build:
+  artifacts:
+  - image: gcr.io/distributed-system-course/web-service
+deploy:
+  kubectl:
+    manifests:
+    - kube\deployment.yaml
+    - kube\service.yaml

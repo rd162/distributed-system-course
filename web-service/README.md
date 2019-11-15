@@ -21,6 +21,16 @@ kubectl apply -f ./kube/service.yaml
 kubectl get service web-service
 ```
 
+## Build and Deploy with Skaffold
+
+```sh
+./mvnw clean package
+skaffold run # This will publish docker images and create service in K8s
+
+# You can simply remove the deployment and service
+skaffold delete
+```
+
 ## Build and Deploy with DevSpace
 
 ```sh
