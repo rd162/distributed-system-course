@@ -121,7 +121,7 @@ Make sure PowerShell 5 (or later, include PowerShell Core) and .NET Framework 4.
 iwr -useb get.scoop.sh | iex
 ```
 
-When the Scoop is installed ,install helm:
+When the Scoop is installed, install helm:
 
 ```sh
 scoop install helm
@@ -138,7 +138,7 @@ If you experience problems with package managers or do not want to use them, the
 There are two parts to Helm: The Helm client (helm) and the Helm server (Tiller).
 Tiller, the server portion of Helm, typically runs inside of your Kubernetes cluster. But for development, it can also be run locally, and configured to talk to a remote Kubernetes cluster.
 
-**Note:** On Windows you may ned to add environment variable `HELM_HOME=C:\Users\{your user id}\.helm`
+**Note:** On Windows you may need to add environment variable `HELM_HOME=C:\Users\{your user id}\.helm`
 **Note:** the service account is required: <https://helm.sh/docs/using_helm/#role-based-access-control>
 
 ```sh
@@ -155,9 +155,61 @@ helm init --service-account tiller --history-max 200
 kubectl get pods --namespace kube-system | grep tiller
 ```
 
-## Install DevSpace
+## DevSpace
 
-<https://devspace.sh/>
+[DevSpace](https://devspace.sh/) is an open-source developer tool for Kubernetes that lets you develop and deploy cloud-native software faster. 
+
+> DevSpace is a very lightweight, client-only CLI tool which uses your current kube-context, just like kubectl or helm. It does not require you to install anything inside your cluster and works out of the box with every Kubernetes cluster. DevSpace is like kubectl on steroids.
+
+### How to Install DevSpace
+
+<https://devspace.cloud/docs/cli/getting-started/installation>
+
+### Useful Features of the DevSpace Tool
+
+#### Deployment
+
+DevSpace lets you automate all build and deployment steps.
+
+<https://devspace.sh/#deployment>
+
+```sh
+devspace deploy # Deploy the service using devspace.yaml in the current directory
+```
+
+#### Logs
+
+Prints the logs of a pod and attaches to it
+
+<https://devspace.cloud/docs/cli/commands/devspace_logs>
+
+```sh
+devspace logs # Executes `kubectl logs` against pod
+```
+
+#### Enter into Pod
+
+Open a shell to a container
+
+<https://devspace.cloud/docs/cli/commands/devspace_enter>
+
+```sh
+devspace enter # Runs shell in the pod
+```
+
+#### UI
+
+> DevSpace ships with a built-in UI optimized for development
+
+The UI provides the following features:
+
+* Namespace Inspection. Get a list of all containers including their status for every context and namespace (+ pod YAML viewer).
+* Real-Time Log Streaming. Click on a container to start log streaming including real terminal colors for the entire log stream.
+* Status Monitoring & Alerts. Quickly detect when containers are failing or pods have issues starting.
+* Interactive Terminal Sessions. Start interactive terminal sessions for each container with just a single click.
+* 1-Click Port-Forwarding. Open any application running inside a container by clicking the 'Open' button which starts port-forwarding and opens the localhost address of the forwarded port inside your browser.
+
+<https://devspace.sh/#ui>
 
 ## Useful Tricks
 

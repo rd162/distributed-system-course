@@ -16,8 +16,8 @@ docker push $CR_NAME/distributed-system-course/rpc-service:latest
 ### Deploy the rpc-service into K8s Cluster
 
 ```sh
-kubectl apply -f ./deployment.yaml # Note you need to update deployment.yaml file with proper CR ($ACR_NAME.azurecr.io) if you use Azure CR
-kubectl apply -f ./service.yaml
+kubectl apply -f ./kube/deployment.yaml # Note you need to update deployment.yaml file with proper CR ($ACR_NAME.azurecr.io) if you use Azure CR
+kubectl apply -f ./kube/service.yaml
 kubectl get service rpc-service
 ```
 
@@ -25,9 +25,9 @@ kubectl get service rpc-service
 
 ```sh
 ./mvnw clean package
-devspace deploy # This will puish docker images and create service in K8s
+devspace deploy # This will publish docker images and create service in K8s
 
-# You can simply remove the deployment
+# You can simply remove the deployment and service
 devspace purge
 ```
 
