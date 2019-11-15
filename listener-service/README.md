@@ -16,7 +16,27 @@ docker push $CR_NAME/distributed-system-course/listener-service:latest
 ### Deploy the listener-service into K8s Cluster
 
 ```sh
-kubectl apply -f ./deployment.yaml # Note you need to update deployment.yaml file with proper CR ($ACR_NAME.azurecr.io) if you use Azure CR
+kubectl apply -f ./kube/deployment.yaml # Note you need to update deployment.yaml file with proper CR ($ACR_NAME.azurecr.io) if you use Azure CR
+```
+
+## Build and Deploy with Skaffold
+
+```sh
+./mvnw clean package
+skaffold run # This will publish docker images and create service in K8s
+
+# You can simply remove the deployment and service
+skaffold delete
+```
+
+## Build and Deploy with DevSpace
+
+```sh
+./mvnw clean package
+devspace deploy # This will publish docker images and create service in K8s
+
+# You can simply remove the deployment and service
+devspace purge
 ```
 
 ## Useful Tricks

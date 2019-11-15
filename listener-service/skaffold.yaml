@@ -1,0 +1,11 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: listener-service
+build:
+  artifacts:
+  - image: gcr.io/distributed-system-course/listener-service
+deploy:
+  kubectl:
+    manifests:
+    - kube\deployment.yaml

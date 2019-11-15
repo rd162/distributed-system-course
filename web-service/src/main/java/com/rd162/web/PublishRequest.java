@@ -1,7 +1,7 @@
 package com.rd162.web;
 
 /**
- * Request model for publishibng messages 
+ * Request model for publishing messages 
  */
 public class PublishRequest {
     private String message;
