@@ -155,6 +155,10 @@ helm init --service-account tiller --history-max 200
 kubectl get pods --namespace kube-system | grep tiller
 ```
 
+## Install DevSpace
+
+<https://devspace.sh/>
+
 ## Useful Tricks
 
 ### How to Switch Current K8s Cluster

@@ -19,6 +19,16 @@ docker push $CR_NAME/distributed-system-course/listener-service:latest
 kubectl apply -f ./deployment.yaml # Note you need to update deployment.yaml file with proper CR ($ACR_NAME.azurecr.io) if you use Azure CR
 ```
 
+## Build and Deploy with DevSpace
+
+```sh
+./mvnw clean package
+devspace deploy # This will puish docker images and create service in K8s
+
+# You can simply remove the deployment
+devspace purge
+```
+
 ## Useful Tricks
 
 ### How to Forcibly Refresh Deployment in K8s

@@ -21,6 +21,16 @@ kubectl apply -f ./service.yaml
 kubectl get service web-service
 ```
 
+## Build and Deploy with DevSpace
+
+```sh
+./mvnw clean package
+devspace deploy # This will puish docker images and create service in K8s
+
+# You can simply remove the deployment
+devspace purge
+```
+
 ## Useful Tricks
 
 ### Check the web-service is Running

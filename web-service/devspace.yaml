@@ -1,0 +1,7 @@
+version: v1beta4
+deployments:
+- name: web-service
+  kubectl:
+    manifests:
+    - 'kube/**'
+dev: {}
