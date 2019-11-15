@@ -31,16 +31,6 @@ skaffold run # This will publish docker images and create service in K8s
 skaffold delete
 ```
 
-## Build and Deploy with DevSpace
-
-```sh
-./mvnw clean package
-devspace deploy # This will publish docker images and create service in K8s
-
-# You can simply remove the deployment and service
-devspace purge
-```
-
 ## Useful Tricks
 
 ### How to Forcibly Refresh Deployment in K8s
