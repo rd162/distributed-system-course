@@ -157,8 +157,6 @@ kubectl get pods --namespace kube-system | grep tiller
 
 ## Kubernetes Developer Tools
 
-These tools can dramatically simplify development workflow with Kubernetes (like build/push images, deploy services, etc.). With this repository you can use [Skaffold](https://skaffold.dev) and [DevSpace](https://devspace.sh). Skaffold is the Google tool and more widely adopted as standard. While DevSpace has additional features (like retrieving logs or running shell inside the pod) and has built in web-UI.
-
 ### Skaffold
 
 > [Skaffold](https://skaffold.dev) handles the workflow for building, pushing and deploying your application, allowing you to focus on what matters most: writing code.
@@ -190,30 +188,6 @@ skaffold delete # Delete the application and service from K8s cluster
 ```
 
 Full CLI reference: <https://skaffold.dev/docs/references/cli/>
-
-### DevSpace
-
-> [DevSpace](https://devspace.sh) is an open-source developer tool for Kubernetes that lets you develop and deploy cloud-native software faster.
-
-#### How to Install DevSpace
-
-<https://devspace.cloud/docs/cli/getting-started/installation>
-
-#### Useful Features of the DevSpace Tool
-
-```sh
-# Deploy the service using devspace.yaml in the current directory <https://devspace.sh/#deployment>
-devspace deploy
-
-# Prints the logs of a pod and attaches to it <https://devspace.cloud/docs/cli/commands/devspace_logs>
-devspace logs
-
-# Runs shell in the pod <https://devspace.cloud/docs/cli/commands/devspace_enter>
-devspace enter
-
-# Run UI in the local browser
-devspace UI
-```
 
 ### Draft
 
