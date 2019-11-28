@@ -1,3 +1,27 @@
+# Build results
+.vs
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Pp]ackages/
+.idea/
+*.userprefs
+out
+build
+.gradle
+data
+logs
+._data
+._logs
+*.iml
+
 # Compiled class file
 *.class
 

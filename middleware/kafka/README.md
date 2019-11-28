@@ -12,8 +12,13 @@ Also, see this guide <https://bitnami.com/stack/kafka/helm>
 # Add custom Helm repository
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-# Install 5-node Kafka cluster
-helm install bitnami/kafka --name kafka --set replicaCount=5 --set deleteTopicEnable="true" --set logRetentionHours=24 --set defaultReplicationFactor=3 --set offsetsTopicReplicationFactor=3 --set transactionStateLogReplicationFactor=3 --set transactionStateLogMinIsr=3 --set numPartitions=16
+# Install durable 5-node Kafka cluster
+NODE_COUNT=5
+REPLICATION_FACTOR=3
+PARTITIONS=25 # 25 / 5 == 5 allow maximum listener node replicas (each consumer node can read from 5 replicas in parallel and each replica will be on different node)
+helm install bitnami/kafka --name kafka --set replicaCount=$NODE_COUNT --set deleteTopicEnable="true" --set logRetentionHours=24 --set defaultReplicationFactor=$REPLICATION_FACTOR --set offsetsTopicReplicationFactor=3 --set transactionStateLogReplicationFactor=3 --set transactionStateLogMinIsr=3 --set numPartitions=$PARTITIONS
+# What happens if the producers send messages faster than the consumers can process them? 
+# What happens if nodes crash or temporarily go offline—are any messages lost?
 ```
 
 #### Verify the Kafka Deployment

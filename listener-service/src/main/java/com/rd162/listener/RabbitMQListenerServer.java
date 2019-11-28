@@ -1,7 +1,6 @@
 package com.rd162.listener;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
 
 import com.rabbitmq.client.ConnectionFactory;
