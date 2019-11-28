@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: listener-service
       version: v1
-  replicas: 1
+  replicas: 5
   template:
     metadata:
       labels:

@@ -68,9 +68,9 @@ public final class KafkaEventProducer<T> implements EventProducer<T> {
     }
 
     @Override
-    public void send(String topic, Event<T> event) {
+    public void send(Event<T> event) {
         try {
-            sendAsync(topic, event).get();
+            sendAsync(event).get();
         } catch (InterruptedException e) {
             return;
         } catch (ExecutionException e) {
@@ -83,7 +83,8 @@ public final class KafkaEventProducer<T> implements EventProducer<T> {
     }
 
     @Override
-    public Future<Event<T>> sendAsync(String topic, Event<T> event) {
+    public Future<Event<T>> sendAsync(Event<T> event) {
+        String topic = configuration.getTopic();
         if (producer == null) {
             lock.lock();
             try {

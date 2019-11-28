@@ -183,7 +183,7 @@ scoop install skaffold
 #### Useful Features of the Skaffold Tool
 
 ```sh
-skaffold run # Build and deploy into the current K8s cluster
+skaffold run --tail # Build and deploy into the current K8s cluster and start producing logs
 skaffold delete # Delete the application and service from K8s cluster
 ```
 
