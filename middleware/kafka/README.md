@@ -20,11 +20,13 @@ PARTITIONS=100
 # Partitions = DesiredThroughput / SingleConsumerThroughput
 # ParallelConsumerCount = DesiredThroughput/ConsumerReplicaCount/SingleConsumerThroughput
 
-helm install bitnami/kafka --name kafka --set replicaCount=$NODE_COUNT --set deleteTopicEnable="true" --set logRetentionHours=24 --set defaultReplicationFactor=$REPLICATION_FACTOR --set offsetsTopicReplicationFactor=3 --set transactionStateLogReplicationFactor=3 --set transactionStateLogMinIsr=3 --set numPartitions=$PARTITIONS
+helm install --name kafka bitnami/kafka --set replicaCount=$NODE_COUNT --set deleteTopicEnable="true" --set logRetentionHours=24 --set defaultReplicationFactor=$REPLICATION_FACTOR --set offsetsTopicReplicationFactor=3 --set transactionStateLogReplicationFactor=3 --set transactionStateLogMinIsr=3 --set numPartitions=$PARTITIONS
 
 # What happens if the producers send messages faster than the consumers can process them?
 # What happens if nodes crash or temporarily go offline — are any messages lost?
 ```
+
+**Note:** With Helm v3 please omit the --name parameter
 
 #### Verify the Kafka Deployment
 

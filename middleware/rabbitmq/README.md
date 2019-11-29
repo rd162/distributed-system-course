@@ -16,6 +16,8 @@ kubectl port-forward --namespace default svc/rabbitmq 5672:5672
 kubectl port-forward --namespace default svc/rabbitmq 15675:15672
 ```
 
+**Note:** With Helm v3 please omit the --name parameter
+
 Now you can open in the browser <http://127.0.0.1:15675>. Login: guest / guest.
 
 How to delete RabbitMQ from the cluster:

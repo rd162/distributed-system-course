@@ -30,11 +30,12 @@ gcloud auth configure-docker
 
 ##### Create K8s Cluster in GKE
 
-**Note:** The number of nodes (here is 3) might be different for each course task.
+**Note:** The number of cluster nodes might be different for each course task.
+**Note:** For Kafka deployment there should be at least 5 nodes
 
 ```sh
 CLUSTER_NAME=gcloud-cluster
-gcloud container clusters create $CLUSTER_NAME --num-nodes=3 --machine-type="custom-1-1024" --disk-type="pd-standard" --disk-size="10GB" # f1-micro 0.2CPU/0.6Gb, g1-small 0.5CPU 1.7Gb
+gcloud container clusters create $CLUSTER_NAME --num-nodes=3 --machine-type="custom-1-1024" --disk-type="pd-standard" --disk-size="10GB" # More cheap options, but might not work: f1-micro 0.2CPU/0.6Gb, g1-small 0.5CPU 1.7Gb
 gcloud container clusters get-credentials $CLUSTER_NAME # This will also update your kube config.
 ```
 
@@ -134,6 +135,8 @@ If you experience problems with package managers or do not want to use them, the
 <https://helm.sh/docs/using_helm/#installing-the-helm-client>
 
 ### Install Helm Server (Tiller) into the K8s Cluster
+
+**NOTE:** Helm v3 does not use Tiller any more and does not require to perform these steps.
 
 There are two parts to Helm: The Helm client (helm) and the Helm server (Tiller).
 Tiller, the server portion of Helm, typically runs inside of your Kubernetes cluster. But for development, it can also be run locally, and configured to talk to a remote Kubernetes cluster.
